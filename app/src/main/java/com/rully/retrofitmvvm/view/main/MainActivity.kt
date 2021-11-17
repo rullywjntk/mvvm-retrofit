@@ -60,14 +60,21 @@ class MainActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val responseBody = response.body()
                     if (responseBody != null) {
-                        adapter = UserAdapter()
-                        adapter.setData(responseBody.data as MutableList<DataItem>)
-                        val layoutManager = LinearLayoutManager(this@MainActivity)
-                        binding.rvUser.layoutManager = layoutManager
-                        val itemDecoration = DividerItemDecoration(this@MainActivity, layoutManager.orientation)
-                        binding.rvUser.addItemDecoration(itemDecoration)
-                        binding.rvUser.setHasFixedSize(true)
-                        binding.rvUser.adapter = adapter
+                        val responseData = responseBody.data
+                        if (responseData != null) {
+                            adapter = UserAdapter()
+                            adapter.setData(responseBody.data as MutableList<DataItem>)
+                            val layoutManager = LinearLayoutManager(this@MainActivity)
+                            binding.rvUser.layoutManager = layoutManager
+                            val itemDecoration = DividerItemDecoration(this@MainActivity, layoutManager.orientation)
+                            binding.rvUser.addItemDecoration(itemDecoration)
+                            binding.rvUser.setHasFixedSize(true)
+                            binding.rvUser.adapter = adapter
+                        } else {
+                            // ini harus pasang kondisi
+                        }
+                    } else {
+                        // ini harus pasang kondisi
                     }
                 }
             }
